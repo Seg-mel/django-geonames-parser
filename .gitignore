@@ -1,3 +1,7 @@
-/geo_names_parser.iml
+# Dirs
 /.idea
 /tmp
+
+# Files
+db.sqlite3
+*.iml
