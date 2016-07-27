@@ -46,7 +46,6 @@ ALTERNATE_CITY_FIELDS = {
     'name': 3,
     'iso_language': 2,
     'geoname_id': 1,
-
 }
 
 
@@ -54,7 +53,7 @@ def get_cities():
     for_index = 0
     debug_line = None
     city_list = []
-    country_id_dict = dict(Country.objects.values_list('iso', 'geoname_id'))
+    country_id_dict = dict(Country.objects.values_list('iso', 'id'))
     try:
         with open(ALL_COUNTRIES_FILE_PATH) as country_file:
             for line in csv.reader(country_file, dialect='excel-tab'):
@@ -68,13 +67,13 @@ def get_cities():
                         city_list.append(City(
                             id=line[CITY_FIELDS['geoname_id']],
                             country_id=country_id_dict[line[CITY_FIELDS['counrty']]],
-                            name=line[CITY_FIELDS['name']],
-                            latitude=line[CITY_FIELDS['latitude']],
-                            longitude=line[CITY_FIELDS['longitude']],
+                            name=line[CITY_FIELDS['name']].strip(),
+                            latitude=line[CITY_FIELDS['latitude']].strip(),
+                            longitude=line[CITY_FIELDS['longitude']].strip(),
                             timezone=line[CITY_FIELDS['timezone']],
-                            feature_class=line[CITY_FIELDS['feature_class']],
-                            feature_code=line[CITY_FIELDS['feature_code']],
-                            date_modification=line[CITY_FIELDS['date_modification']],
+                            feature_class=line[CITY_FIELDS['feature_class']].strip(),
+                            feature_code=line[CITY_FIELDS['feature_code']].strip(),
+                            date_modification=line[CITY_FIELDS['date_modification']].strip(),
                         ))
                     if divmod(for_index, 500000)[1] == 0:
                         logger.info(for_index)
@@ -101,8 +100,8 @@ def get_alternate_city_names():
                     if geoname_id in city_geoname_id_set and len(iso_language) in [2, 3]:
                         alternate_city_list.append(CityAlternate(
                             city_id=geoname_id,
-                            name=line[ALTERNATE_CITY_FIELDS['name']],
-                            iso_language=iso_language,
+                            name=line[ALTERNATE_CITY_FIELDS['name']].strip(),
+                            iso_language=iso_language.strip(),
                         ))
                     if divmod(for_index, 500000)[1] == 0:
                         logger.info(for_index)

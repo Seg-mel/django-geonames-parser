@@ -15,7 +15,7 @@
 
         <ul>
             {% for city in cities %}
-                <li>{{ city.country }}, {{ city.name }} ({{ city.latitude }}, {{ city.longitude }})</li>
+                <li>{{ city.country.name }}, {{ city.name }} ({{ city.latitude }}, {{ city.longitude }})</li>
             {% endfor %}
         </ul>
     </body>
