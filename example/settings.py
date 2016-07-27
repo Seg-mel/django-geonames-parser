@@ -17,6 +17,7 @@ import sys
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 sys.path.insert(0, BASE_DIR)
+sys.path.insert(0, os.path.join(BASE_DIR, '..'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -33,9 +34,9 @@ INSTALLED_APPS = (
     'geo_names',
 )
 
-MIDDLEWARE_CLASSES = ()
+ROOT_URLCONF = 'urls'
 
-# WSGI_APPLICATION = 'geo_names.wsgi.application'
+MIDDLEWARE_CLASSES = ()
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -46,6 +47,18 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Static
+
+STATIC_URL = '/static/'
+
+# Templates
+
+TEMPLATES = [{
+    'BACKEND': 'django.template.backends.django.DjangoTemplates',
+    'DIRS': ['templates'],
+    'APP_DIRS': True,
+}]
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -100,3 +113,6 @@ LOGGING = {
 
 COUNTRIES_FILE_PATH = os.path.join(BASE_DIR, 'tmp', 'countryInfo.txt')
 ALTERNATE_NAMES_FILE_PATH = os.path.join(BASE_DIR, 'tmp', 'alternateNames.txt')
+ALL_COUNTRIES_FILE_PATH = os.path.join(BASE_DIR, 'tmp', 'cities15000.txt')
+CITY_FEATURE_CLASS = 'P'
+CITY_FEATURE_CODES = None

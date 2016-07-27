@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>Example</title>
+    </head>
+
+    <body>
+        <form method="get">
+            <input name="search" placeholder="City" value="{{ search }}">
+
+            <button>Submit</button>
+        </form>
+
+        <ul>
+            {% for city in cities %}
+                <li>{{ city.country }}, {{ city.name }} ({{ city.latitude }}, {{ city.longitude }})</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
