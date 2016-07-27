@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.utils.translation import get_language
 
 
 class Country(models.Model):
@@ -12,6 +13,19 @@ class Country(models.Model):
 
     datetime_create = models.DateTimeField(auto_now_add=True)
     datetime_update = models.DateTimeField(auto_now=True)
+
+    @property
+    def alternate_names(self):
+        return self.countryalternate_set.all()
+
+    @property
+    def name_i18n(self):
+        language = get_language()
+        if language == 'ru':
+            alternate_name_object = self.alternate_names.filter(iso_language='ru').first()
+            if alternate_name_object:
+                return alternate_name_object.name
+        return self.name
 
 
 class CountryAlternate(models.Model):
@@ -37,6 +51,19 @@ class City(models.Model):
 
     datetime_create = models.DateTimeField(auto_now_add=True)
     datetime_update = models.DateTimeField(auto_now=True)
+
+    @property
+    def alternate_names(self):
+        return self.cityalternate_set.all()
+
+    @property
+    def name_i18n(self):
+        language = get_language()
+        if language == 'ru':
+            alternate_name_object = self.alternate_names.filter(iso_language='ru').first()
+            if alternate_name_object:
+                return alternate_name_object.name
+        return self.name
 
 
 class CityAlternate(models.Model):
