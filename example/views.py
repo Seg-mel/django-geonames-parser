@@ -1,4 +1,5 @@
 # coding=utf-8
+from django.db.models import Q
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
@@ -14,5 +15,8 @@ class SearchView(TemplateView):
             request,
             self.template_name,
             {'search': search,
-             'cities': set([ca.city for ca in CityAlternate.objects.filter(name__istartswith=search)])},
+             'cities': set([ca.city for ca in CityAlternate.objects.filter(
+                 Q(name__istartswith=search) |
+                 Q(city__name__istartswith=search)
+             )])},
         )
