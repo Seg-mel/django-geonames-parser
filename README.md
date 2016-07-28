@@ -1,2 +1,2 @@
-# geo_names_parser
+# django-geonames-parser
 Django GeoNames parser
