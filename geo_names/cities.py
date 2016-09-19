@@ -5,9 +5,9 @@ import os
 import sys
 
 from django.conf import settings
+from django.db.models import Sum, Case, When, IntegerField
 
-from geo_names.models import City, Country, CityAlternate
-
+from geo_names.models import City, Country, CityAlternate, CityLocaleName
 
 csv.field_size_limit(sys.maxsize)
 
@@ -111,3 +111,23 @@ def get_alternate_city_names():
             CityAlternate.objects.bulk_create(alternate_city_list)
     except Exception, error:
         logger.debug(u'{}\n{}'.format(error, unicode(debug_line)))
+
+
+def get_alternate_city_locale_names(locale='ru'):
+    alternate_cities_list = City.objects.annotate(
+        alt_cities_count=Sum(Case(
+            When(cityalternate__iso_language=locale, then=1),
+            default=0,
+            output_field=IntegerField(),
+        )),
+    ).filter(alt_cities_count=1)
+
+    for city in alternate_cities_list:
+        alternate_name = city.alternate_names.filter(iso_language=locale).first()
+        CityLocaleName.objects.create(
+            city=alternate_name.city,
+            name=alternate_name.name,
+            iso_language=alternate_name.iso_language,
+            datetime_create=alternate_name.datetime_create,
+            datetime_update=alternate_name.datetime_update,
+        )

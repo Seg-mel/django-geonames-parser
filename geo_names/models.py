@@ -60,13 +60,23 @@ class City(models.Model):
     def name_i18n(self):
         language = get_language()
         if language == 'ru':
-            alternate_name_object = self.alternate_names.filter(iso_language='ru').first()
+            alternate_name_object = self.citylocalename_set.filter(iso_language='ru').first()
             if alternate_name_object:
                 return alternate_name_object.name
         return self.name
 
 
 class CityAlternate(models.Model):
+    city = models.ForeignKey(City)
+
+    name = models.CharField(max_length=255)
+    iso_language = models.CharField(max_length=3)
+
+    datetime_create = models.DateTimeField(auto_now_add=True)
+    datetime_update = models.DateTimeField(auto_now=True)
+
+
+class CityLocaleName(models.Model):
     city = models.ForeignKey(City)
 
     name = models.CharField(max_length=255)
