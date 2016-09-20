@@ -4,9 +4,9 @@ import logging
 import os
 
 from django.conf import settings
+from django.db.models import When, Sum, Case, IntegerField
 
-from geo_names.models import Country, CountryAlternate
-
+from geo_names.models import Country, CountryAlternate, CountryLocaleName
 
 logger = logging.getLogger(__name__)
 
@@ -82,3 +82,24 @@ def get_alternate_country_names():
                 __write_aternate_country_name_to_db(line, country_geoname_id_list)
     except Exception, error:
         logger.debug(error)
+
+
+def get_alternate_country_locale_names(locale='ru'):
+    alternate_countries_list = Country.objects.annotate(
+        alt_countries_count=Sum(Case(
+            When(countryalternate__iso_language=locale, then=1),
+            default=0,
+            output_field=IntegerField(),
+        )),
+    ).filter(alt_countries_count=1)
+    print alternate_countries_list.count()
+
+    for country in alternate_countries_list:
+        alternate_name = country.alternate_names.filter(iso_language=locale).first()
+        CountryLocaleName.objects.create(
+            country=alternate_name.country,
+            name=alternate_name.name,
+            iso_language=alternate_name.iso_language,
+            datetime_create=alternate_name.datetime_create,
+            datetime_update=alternate_name.datetime_update,
+        )

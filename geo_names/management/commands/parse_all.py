@@ -3,7 +3,7 @@ from django.conf import settings
 from django.core.management import BaseCommand, CommandError
 
 from geo_names.cities import get_cities, get_alternate_city_names, get_alternate_city_locale_names
-from geo_names.countries import get_counties, get_alternate_country_names
+from geo_names.countries import get_counties, get_alternate_country_names, get_alternate_country_locale_names
 
 
 class Command(BaseCommand):
@@ -19,6 +19,7 @@ class Command(BaseCommand):
             get_cities()
             get_alternate_city_names()
             get_alternate_city_locale_names('ru')
+            get_alternate_country_locale_names('ru')
 
             self.stdout.write('Successful parsing!')
         else:
