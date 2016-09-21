@@ -19,12 +19,16 @@ class Country(models.Model):
         return self.countryalternate_set.all()
 
     @property
+    def locale_names(self):
+        return self.countrylocalename_set.all()
+
+    @property
     def name_i18n(self):
         language = get_language()
         if language == 'ru':
-            alternate_name_object = self.alternate_names.filter(iso_language='ru').first()
-            if alternate_name_object:
-                return alternate_name_object.name
+            locale_name_object = self.locale_names.filter(iso_language='ru').first()
+            if locale_name_object:
+                return locale_name_object.name
         return self.name
 
 
@@ -69,12 +73,16 @@ class City(models.Model):
         return self.cityalternate_set.all()
 
     @property
+    def locale_names(self):
+        return self.citylocalename_set.all()
+
+    @property
     def name_i18n(self):
         language = get_language()
         if language == 'ru':
-            alternate_name_object = self.citylocalename_set.filter(iso_language='ru').first()
-            if alternate_name_object:
-                return alternate_name_object.name
+            locale_name_object = self.locale_names.filter(iso_language='ru').first()
+            if locale_name_object:
+                return locale_name_object.name
         return self.name
 
 
