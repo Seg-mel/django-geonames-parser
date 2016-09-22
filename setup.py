@@ -13,9 +13,6 @@ setup(
     url='https://github.com/Seg-mel/django-geonames-parser',
     license='MIT',
     packages=find_packages(exclude=('example',)),
-    install_requires=[
-        'Django>=1.8.4',
-    ],
     include_package_data=True,
     keywords=['django', 'geonames', 'parser'],
     classifiers=[
