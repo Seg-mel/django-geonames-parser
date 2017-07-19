@@ -58,6 +58,7 @@ def __write_aternate_country_name_to_db(line, country_geoname_id_list):
     if line and not line[0].startswith('#'):
         iso_language = line[ALTERNATE_COUNTRY_FIELDS['iso_language']]
         geoname_id = int(line[ALTERNATE_COUNTRY_FIELDS['geoname_id']])
+
         if geoname_id in country_geoname_id_list and len(iso_language) in [2, 3]:
             CountryAlternate.objects.create(
                 country_id=geoname_id,
@@ -78,6 +79,7 @@ def get_counties():
 
 def get_alternate_country_names():
     country_geoname_id_list = [v[0] for v in Country.objects.all().values_list('id')]
+
     try:
         with open(ALTERNATE_NAMES_FILE_PATH) as country_file:
             for line in csv.reader(country_file, dialect='excel-tab'):
