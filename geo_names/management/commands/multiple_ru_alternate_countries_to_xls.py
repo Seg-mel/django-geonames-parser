@@ -43,12 +43,14 @@ class Command(BaseCommand):
                     col,
                     xlwt.easyxf('font: bold 1; pattern: pattern solid, fore_colour gray25;'),
                 )
+
                 if index in [1, 3]:
                     sheet.col(index).width = 7000
                 elif index == 2:
                     sheet.col(index).width = 20000
                 else:
                     sheet.col(index).width = 2500
+
             sheet.set_panes_frozen(True)
             sheet.set_horz_split_pos(1)
             sheet.set_vert_split_pos(3)
@@ -60,6 +62,7 @@ class Command(BaseCommand):
                     value.name,
                     ', '.join([ac.name for ac in value.alternate_names.filter(iso_language='ru')]),
                 ]
+
                 for col, col_value in enumerate(data_list):
                     sheet.write(
                         row + 1,
