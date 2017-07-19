@@ -1,4 +1,7 @@
 # coding=utf-8
+from __future__ import unicode_literals, print_function
+from builtins import str as text
+
 import csv
 import logging
 import os
@@ -81,8 +84,8 @@ def get_cities():
                         city_list = []
                     for_index += 1
             City.objects.bulk_create(city_list)
-    except Exception, error:
-        logger.debug(u'{}\n{}'.format(error, unicode(debug_line)))
+    except Exception as error:
+        logger.debug('{}\n{}'.format(error, text(debug_line)))
 
 
 def get_alternate_city_names():
@@ -109,8 +112,8 @@ def get_alternate_city_names():
                         alternate_city_list = []
                     for_index += 1
             CityAlternate.objects.bulk_create(alternate_city_list)
-    except Exception, error:
-        logger.debug(u'{}\n{}'.format(error, unicode(debug_line)))
+    except Exception as error:
+        logger.debug('{}\n{}'.format(error, text(debug_line)))
 
 
 def get_alternate_city_locale_names(locale='ru'):

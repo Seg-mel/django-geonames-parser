@@ -1,4 +1,6 @@
 # coding=utf-8
+from __future__ import unicode_literals, print_function
+
 import xlwt
 from django.conf import settings
 from django.core.management import BaseCommand, CommandError
@@ -25,14 +27,14 @@ class Command(BaseCommand):
 
             workbook = xlwt.Workbook(encoding='utf-8')
 
-            sheet = workbook.add_sheet(u'Города')
+            sheet = workbook.add_sheet('Города')
             titles = [
-                u'ID',
-                u'Страна',
-                u'Английское название города',
-                u'Строка для поиска',
-                u'Русские варианты перевода',
-                u'Yandex вариант перевода',
+                'ID',
+                'Страна',
+                'Английское название города',
+                'Строка для поиска',
+                'Русские варианты перевода',
+                'Yandex вариант перевода',
             ]
 
             # set titles row
@@ -57,12 +59,12 @@ class Command(BaseCommand):
             for row, value in enumerate(alternate_cities_list):
                 data_list = [
                     value.id,
-                    u'{} ({})'.format(
+                    '{} ({})'.format(
                         value.country.alternate_names.filter(iso_language='ru').first().name,
                         value.country.name,
                     ),
                     value.name,
-                    u'{}, {}'.format(value.country.name, value.name),
+                    '{}, {}'.format(value.country.name, value.name),
                     ', '.join([ac.name for ac in value.alternate_names.filter(iso_language='ru')]),
                 ]
                 for col, col_value in enumerate(data_list):

@@ -1,4 +1,6 @@
 # coding=utf-8
+from __future__ import unicode_literals, print_function
+
 import xlwt
 from django.conf import settings
 from django.core.management import BaseCommand, CommandError
@@ -25,12 +27,12 @@ class Command(BaseCommand):
 
             workbook = xlwt.Workbook(encoding='utf-8')
 
-            sheet = workbook.add_sheet(u'Страны')
+            sheet = workbook.add_sheet('Страны')
             titles = [
-                u'ID',
-                u'Страна',
-                u'Русские варианты перевода',
-                u'Yandex вариант перевода',
+                'ID',
+                'Страна',
+                'Русские варианты перевода',
+                'Yandex вариант перевода',
             ]
 
             # set titles row

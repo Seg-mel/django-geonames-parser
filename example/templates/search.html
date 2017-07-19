@@ -14,9 +14,13 @@
         </form>
 
         <ul>
-            {% for city in cities %}
+            {% for city in cities|slice:':20' %}
                 <li>{{ city.country.name_i18n }}, {{ city.name_i18n }} ({{ city.latitude }}, {{ city.longitude }})</li>
             {% endfor %}
+
+            {% if cities.count > 20 %}
+                <div>...</div>
+            {% endif %}
         </ul>
     </body>
 </html>

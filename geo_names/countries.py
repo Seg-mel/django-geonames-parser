@@ -1,4 +1,6 @@
 # coding=utf-8
+from __future__ import unicode_literals, print_function
+
 import csv
 import logging
 import os
@@ -70,7 +72,7 @@ def get_counties():
             for line in csv.reader(country_file, dialect='excel-tab'):
                 if line and not line[0].startswith('#'):
                     __write_country_to_db(line)
-    except Exception, error:
+    except Exception as error:
         logger.debug(error)
 
 
@@ -80,7 +82,7 @@ def get_alternate_country_names():
         with open(ALTERNATE_NAMES_FILE_PATH) as country_file:
             for line in csv.reader(country_file, dialect='excel-tab'):
                 __write_aternate_country_name_to_db(line, country_geoname_id_list)
-    except Exception, error:
+    except Exception as error:
         logger.debug(error)
 
 
@@ -92,7 +94,6 @@ def get_alternate_country_locale_names(locale='ru'):
             output_field=IntegerField(),
         )),
     ).filter(alt_countries_count=1)
-    print alternate_countries_list.count()
 
     for country in alternate_countries_list:
         alternate_name = country.alternate_names.filter(iso_language=locale).first()
