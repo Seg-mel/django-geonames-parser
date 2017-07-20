@@ -58,9 +58,9 @@ All dumps and docs you can see by this [link](http://download.geonames.org/expor
 ## Management commands
 **parse_all** - parse cities, countries, alternate names, names by 'ru' locale <br />
 **parse_cities** - parse cities with alternate names <br />
-**parse_city_locale_names** - parse names by locale for parse cities earlier <br />
+**parse_city_locale_names** - parse names by 'ru' locale for parse cities earlier <br />
 **parse_countries** - parse countries with alternate names <br />
-**parse_country_locale_names** - parse names by locale for parse countries earlier <br />
+**parse_country_locale_names** - parse names by 'ru' locale for parse countries earlier <br />
 
 
 ## GeoNames license
