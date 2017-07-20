@@ -2,7 +2,7 @@
 Parser of cities and countries from [GeoNames](http://www.geonames.org/). Also library parse alternate names and names by locale for cities and countries.
 Tested on Python 2.7/3.6 and Django 1.8/1.11.
 
-## Instalation
+## Installation
 `pip install git+https://github.com/Seg-mel/django-geonames-parser.git`
 
 ## Settings
