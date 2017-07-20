@@ -4,7 +4,7 @@ from __future__ import unicode_literals, print_function
 from django.conf import settings
 from django.core.management import BaseCommand, CommandError
 
-from geo_names.countries import get_alternate_country_locale_names
+from geo_names.country_parser import CountryParser
 
 
 class Command(BaseCommand):
@@ -15,7 +15,8 @@ class Command(BaseCommand):
         if settings.DEBUG:
             self.stdout.write('Start parsing')
 
-            get_alternate_country_locale_names('ru')
+            country_parser = CountryParser()
+            country_parser.get_alternate_locale_names('ru')
 
             self.stdout.write('Successful parsing!')
         else:
