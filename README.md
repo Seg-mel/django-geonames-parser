@@ -35,15 +35,15 @@ ALL_COUNTRIES_FILE_PATH = '<your_directory_with_dumps>/cities15000.txt'
 ```
 
 Set feature class `CITY_FEATURE_CLASS`. Default 'P'.
-A: country, state, region,...<br />
-H: stream, lake, ...<br />
-L: parks,area, ...<br />
-P: city, village,...<br />
-R: road, railroad <br />
-S: spot, building, farm<br />
-T: mountain,hill,rock,... <br />
-U: undersea<br />
-V: forest,heath,...
+* A: country, state, region,...
+* H: stream, lake, ...
+* L: parks,area, ...
+* P: city, village,...
+* R: road, railroad 
+* S: spot, building, farm
+* T: mountain,hill,rock,... 
+* U: undersea
+* V: forest,heath,...
 ```python
 CITY_FEATURE_CLASS = 'P'
 ```
