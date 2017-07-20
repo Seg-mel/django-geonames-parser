@@ -55,5 +55,12 @@ CITY_FEATURE_CODES = ['PPL', 'PPLA', 'PPLF']
 
 All dumps and docs you can see by this [link](http://download.geonames.org/export/dump/).
 
+## Management commands
+**parse_all** - parse cities, countries, alternate names, names by 'ru' locale <br />
+**parse_cities** - parse cities with alternate names <br />
+**parse_city_locale_names** - parse names by locale for parse cities earlier <br />
+**parse_countries** - parse countries with alternate names <br />
+**parse_country_locale_names** - parse names by locale for parse countries earlier <br />
+
 
 This work is licensed under a [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/)
