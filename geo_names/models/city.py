@@ -2,13 +2,14 @@
 from __future__ import unicode_literals, print_function
 
 from django.db import models
+from django.db.models import CASCADE
 from django.utils.translation import get_language
 
 from .country import Country
 
 
 class City(models.Model):
-    country = models.ForeignKey(Country)
+    country = models.ForeignKey(Country, on_delete=CASCADE)
 
     name = models.CharField(max_length=255)
     latitude = models.DecimalField(max_digits=15, decimal_places=10)

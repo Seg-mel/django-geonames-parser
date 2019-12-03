@@ -2,12 +2,13 @@
 from __future__ import unicode_literals, print_function
 
 from django.db import models
+from django.db.models import CASCADE
 
 from .country import Country
 
 
 class CountryAlternate(models.Model):
-    country = models.ForeignKey(Country)
+    country = models.ForeignKey(Country, on_delete=CASCADE)
 
     name = models.CharField(max_length=255)
     iso_language = models.CharField(max_length=3)

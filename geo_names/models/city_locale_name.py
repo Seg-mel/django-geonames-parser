@@ -2,12 +2,13 @@
 from __future__ import unicode_literals, print_function
 
 from django.db import models
+from django.db.models import CASCADE
 
 from .city import City
 
 
 class CityLocaleName(models.Model):
-    city = models.ForeignKey(City)
+    city = models.ForeignKey(City, on_delete=CASCADE)
 
     name = models.CharField(max_length=255)
     iso_language = models.CharField(max_length=3)

@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.db.models import CASCADE
 
 
 class Migration(migrations.Migration):
@@ -19,7 +20,7 @@ class Migration(migrations.Migration):
                 ('iso_language', models.CharField(max_length=3)),
                 ('datetime_create', models.DateTimeField(auto_now_add=True)),
                 ('datetime_update', models.DateTimeField(auto_now=True)),
-                ('city', models.ForeignKey(to='geo_names.City')),
+                ('city', models.ForeignKey(to='geo_names.City', on_delete=CASCADE)),
             ],
         ),
     ]
